@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mausam | Choose Your Interests</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #e5f4ff, #f5faff, #eaf3ff);
+            color: #263f54;
+            min-height: 100vh;
+            padding: 35px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #236c91;
+            margin-bottom: 35px;
+        }
+
+        h1 {
+            font-size: 38px;
+            color: #205c80;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            color: #637c8d;
+            font-size: 16px;
+            margin-bottom: 35px;
+        }
+
+        .interest-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            text-align: left;
+        }
+
+        .interest-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: white;
+            border: 2px solid transparent;
+            border-radius: 14px;
+            padding: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 14px rgba(40, 90, 120, 0.07);
+        }
+
+        .interest-card:hover {
+            border-color: #78b9dc;
+            transform: translateY(-3px);
+        }
+
+        .interest-card input {
+            width: 18px;
+            height: 18px;
+            accent-color: #287ca6;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .emoji {
+            font-size: 30px;
+        }
+
+        .interest-card h3 {
+            font-size: 16px;
+            color: #286b91;
+            margin-bottom: 5px;
+        }
+
+        .interest-card p {
+            font-size: 13px;
+            color: #718797;
+            line-height: 1.5;
+        }
+
+        .continue-btn {
+            margin-top: 32px;
+            padding: 14px 45px;
+            border: none;
+            border-radius: 30px;
+            background: #287ca6;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .continue-btn:hover {
+            background: #1d6288;
+            transform: translateY(-2px);
+        }
+
+        .note {
+            margin-top: 18px;
+            color: #8295a3;
+            font-size: 13px;
+        }
+
+        .message {
+            margin-top: 25px;
+            padding: 18px;
+            border-radius: 12px;
+            line-height: 1.7;
+            text-align: center;
+        }
+
+        .success {
+            background: #e4f5e9;
+            color: #246b3c;
+        }
+
+        .error {
+            background: #fff0ed;
+            color: #a33d32;
+        }
+
+        .selected-list {
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 650px) {
+            h1 {
+                font-size: 29px;
+            }
+
+            .interest-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="logo">☀ MAUSAM</div>
+
+        <h1>What matters to you?</h1>
+
+        <p class="subtitle">
+            Select your interests and let Mausam bring
+            the weather information that matters most to you.
+        </p>
+
+        <form action="/interests" method="POST">
+
+            <div class="interest-grid">
+
+                <label class="interest-card">
+                    <input type="checkbox" name="interests"
+                        value="Health"
+                        {% if "Health" in selected_interests %}checked{% endif %}>
+                    <span class="emoji">🌿</span>
+                    <div>
+                        <h3>Health-conscious</h3>
+                        <p>AQI, pollen count, UV index and humidity.</p>
+                    </div>
+                </label>
+
+                <label class="interest-card">
+                    <input type="checkbox" name="interests"
+                        value="Fitness"
+                        {% if "Fitness" in selected_interests %}checked{% endif %}>
+                    <span class="emoji">🏃</span>
+                    <div>
+                        <h3>Outdoor Fitness</h3>
+                        <p>Running hours, sunrise, wind and heat alerts.</p>
+                    </div>
+                </label>
+
+                <label class="interest-card">
+                    <input type="checkbox" name="interests"
+                        value="Beach"
+                        {% if "Beach" in selected_interests %}checked{% endif %}>
+                    <span class="emoji">🏖️</span>
+                    <div>
+                        <h3>Beachgoers & Surfers</h3>
+                        <p>Sea conditions, tides, waves and water temperature.</p>
+                    </div>
+                </label>
+
+                <label class="interest-card">
+                    <input type="checkbox" name="interests"
+                        value="Travel"
+                        {% if "Travel" in selected_interests %}checked{% endif %}>
+                    <span class="emoji">✈️</span>
+                    <div>
+                        <h3>Travelers</h3>
+                        <p>Destination weather, travel alerts and packing tips.</p>
+                    </div>
+                </label>
+
+                <label class="interest-card">
+                    <input type="checkbox" name="interests"
+                        value="Family"
+                        {% if "Family" in selected_interests %}checked{% endif %}>
+                    <span class="emoji">👨‍👩‍👧</span>
+                    <div>
+                        <h3>Parents & Families</h3>
+                        <p>School commute, rain alerts and severe weather warnings.</p>
+                    </div>
+                </label>
+
+                <label class="interest-card">
+                    <input type="checkbox" name="interests"
+                        value="Agriculture"
+                        {% if "Agriculture" in selected_interests %}checked{% endif %}>
+                    <span class="emoji">🌾</span>
+                    <div>
+                        <h3>Agriculture & Gardeners</h3>
+                        <p>Soil moisture, rainfall, frost and planting guidance.</p>
+                    </div>
+                </label>
+
+                <label class="interest-card">
+                    <input type="checkbox" name="interests"
+                        value="Commuters"
+                        {% if "Commuters" in selected_interests %}checked{% endif %}>
+                    <span class="emoji">🚗</span>
+                    <div>
+                        <h3>Commuters</h3>
+                        <p>Traffic-related weather, visibility and fog alerts.</p>
+                    </div>
+                </label>
+
+                <label class="interest-card">
+                    <input type="checkbox" name="interests"
+                        value="Events"
+                        {% if "Events" in selected_interests %}checked{% endif %}>
+                    <span class="emoji">🎉</span>
+                    <div>
+                        <h3>Event Planners</h3>
+                        <p>Extended forecasts, rain chances and comfort index.</p>
+                    </div>
+                </label>
+
+            </div>
+
+            <button class="continue-btn" type="submit">
+                Continue →
+            </button>
+
+        </form>
+
+        <p class="note">
+            You can choose more than one interest.
+        </p>
+
+        {% if error %}
+            <div class="message error">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        {% if submitted %}
+            <div class="message success">
+                <strong>Great! Mausam received your interests.</strong>
+                <div class="selected-list">
+                    {% for interest in selected_interests %}
+                        {{ interest }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </div>
+                <p>Your preferences have been received successfully.</p>
+            </div>
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>
+
